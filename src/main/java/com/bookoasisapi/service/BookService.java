@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.book_oasis_api.exception.BookNotFoundException;
 import com.book_oasis_api.model.Book;
 import com.book_oasis_api.repository.BookRepository;
 
@@ -20,7 +21,7 @@ public Book addBook(Book book) {
 }
 
 public Book getBookById(Long id) {
-    return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+    return bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
 }
 
 public Book updateBook(Long id, Book updatedBook) {
@@ -31,7 +32,7 @@ public Book updateBook(Long id, Book updatedBook) {
                 book.setPublicationYear(updatedBook.getPublicationYear());
                 return bookRepository.save(book);
             })
-            .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+            .orElseThrow(() -> new BookNotFoundException(id));
         }
 
 public Book deleteBook(Long id) {
@@ -40,7 +41,7 @@ public Book deleteBook(Long id) {
                 bookRepository.delete(book);
                 return book;
             })
-            .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+            .orElseThrow(() -> new BookNotFoundException(id));
     }
 
 public Page<Book> getAllBooks(Pageable pageable) {
