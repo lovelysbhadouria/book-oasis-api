@@ -1,4 +1,4 @@
-package com.book_oasis_api.exception;
+package com.bookoasisapi.exception;
 
 /**
  * BookNotFoundException

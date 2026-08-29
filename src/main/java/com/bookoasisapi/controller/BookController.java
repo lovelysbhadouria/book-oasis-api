@@ -1,4 +1,4 @@
-package com.book_oasis_api.controller;
+package com.bookoasisapi.controller;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.book_oasis_api.model.Book;
-import com.book_oasis_api.service.BookService;
+import com.bookoasisapi.model.Book;
+import com.bookoasisapi.service.BookService;
 
 import jakarta.persistence.PostRemove;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -52,9 +52,9 @@ public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book 
 
 // Delete Book method
 @DeleteMapping("/{id}")
-public ResponseEntity<Book> deleteBook(@PathVariable Long id) {
-    Book deletedBook = bookService.deleteBook(id);
-    return ResponseEntity.ok(deletedBook);
+public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+    bookService.deleteBook(id);
+    return ResponseEntity.noContent().build();
 }
 
 // Get All books method

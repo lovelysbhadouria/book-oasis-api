@@ -1,4 +1,4 @@
-package com.book_oasis_api.model;
+package com.bookoasisapi.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

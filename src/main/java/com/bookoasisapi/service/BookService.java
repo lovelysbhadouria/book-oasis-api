@@ -1,12 +1,12 @@
-package com.book_oasis_api.service;
+package com.bookoasisapi.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.book_oasis_api.exception.BookNotFoundException;
-import com.book_oasis_api.model.Book;
-import com.book_oasis_api.repository.BookRepository;
+import com.bookoasisapi.exception.BookNotFoundException;
+import com.bookoasisapi.model.Book;
+import com.bookoasisapi.repository.BookRepository;
 
 @Service
 public class BookService {
@@ -35,14 +35,11 @@ public Book updateBook(Long id, Book updatedBook) {
             .orElseThrow(() -> new BookNotFoundException(id));
         }
 
-public Book deleteBook(Long id) {
-    return bookRepository.findById(id)
-            .map(book -> {
-                bookRepository.delete(book);
-                return book;
-            })
+public void deleteBook(Long id) {
+  Book book = bookRepository.findById(id)
             .orElseThrow(() -> new BookNotFoundException(id));
-    }
+    bookRepository.delete(book);
+}
 
 public Page<Book> getAllBooks(Pageable pageable) {
     return bookRepository.findAll(pageable);

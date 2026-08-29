@@ -1,4 +1,4 @@
-package com.book_oasis_api;
+package com.bookoasisapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
