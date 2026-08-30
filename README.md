@@ -10,7 +10,7 @@ The Book Oasis is a local bookshop that used to track its stock on paper. This A
 
 ## Tech stack Used
 - Java 21
-- Spring Boot 4.1.1 (Spring Web, Spring Data JPA, Validation, Actuator, Swagger)
+- Spring Boot 4.1.1 (Spring Web, Spring Data JPA, Validation, Actuator, Swagger, Lombok)
 - H2 in-memory database
 - SpringDoc OpenAPI (Swagger UI) for interactive API docs
 - JUnit 5 + Mockito for testing
