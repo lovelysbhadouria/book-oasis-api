@@ -53,4 +53,13 @@ public ResponseEntity<Map<String, Object>> handleMalformedJson(HttpMessageNotRea
     errorResponse.put("error", "Malformed request body");
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
 }
+
+@ExceptionHandler(IllegalArgumentException.class)
+public ResponseEntity<Map<String, Object>> handleIllegalArgument(IllegalArgumentException ex) {
+    Map<String, Object> errorResponse = new HashMap<>();
+    errorResponse.put("timestamp", LocalDateTime.now());
+    errorResponse.put("status", HttpStatus.BAD_REQUEST.value());
+    errorResponse.put("error", ex.getMessage());
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+}
 }

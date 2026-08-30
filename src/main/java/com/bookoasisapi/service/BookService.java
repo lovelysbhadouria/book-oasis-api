@@ -1,5 +1,7 @@
 package com.bookoasisapi.service;
 
+import java.time.Year;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ public BookService(BookRepository bookRepository) {
 }
 
 public Book addBook(Book book) {
+    validatePublicationYear(book.getPublicationYear());
     return bookRepository.save(book);
 }
 
@@ -25,6 +28,7 @@ public Book getBookById(Long id) {
 }
 
 public Book updateBook(Long id, Book updatedBook) {
+    validatePublicationYear(updatedBook.getPublicationYear());
     return bookRepository.findById(id)
             .map(book -> {
                 book.setTitle(updatedBook.getTitle());
@@ -34,6 +38,12 @@ public Book updateBook(Long id, Book updatedBook) {
             })
             .orElseThrow(() -> new BookNotFoundException(id));
         }
+
+private void validatePublicationYear(Integer year) {
+    if (year > Year.now().getValue()) {
+        throw new IllegalArgumentException("Publication year cannot be in the future");
+    }
+}
 
 public void deleteBook(Long id) {
   Book book = bookRepository.findById(id)
