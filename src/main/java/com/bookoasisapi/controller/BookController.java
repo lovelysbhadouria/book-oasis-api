@@ -15,6 +15,8 @@ import com.bookoasisapi.model.Book;
 import com.bookoasisapi.service.BookService;
 
 import jakarta.persistence.PostRemove;
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;
@@ -31,7 +33,7 @@ public BookController(BookService bookService) {
 
 // Adding Book method
 @PostMapping
-public ResponseEntity<Book> addBook(@RequestBody Book book) {
+public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
     Book createdBook = bookService.addBook(book);
     return ResponseEntity.status(HttpStatus.CREATED).body(createdBook);}
 
@@ -44,7 +46,7 @@ public ResponseEntity<Book> getBookById(@PathVariable Long id) {
 
 // Update Book method   
 @PutMapping("/{id}")
-public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+public ResponseEntity<Book> updateBook(@PathVariable Long id, @Valid @RequestBody Book updatedBook) {
     Book book = bookService.updateBook(id, updatedBook);
     return ResponseEntity.ok(book);
 
