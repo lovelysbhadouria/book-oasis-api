@@ -19,6 +19,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 
 
@@ -61,7 +62,7 @@ public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
 
 // Get All books method
 @GetMapping
-public ResponseEntity<Page<Book>> getAllBooks(Pageable pageable) {
+public ResponseEntity<Page<Book>> getAllBooks(@ParameterObject Pageable pageable) {
     Page<Book> booksPage = bookService.getAllBooks(pageable);
     return ResponseEntity.ok(booksPage);
 
